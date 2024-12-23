@@ -54,21 +54,23 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Container(
-            width: double.infinity,
-            child: const Card(
-              color: Colors.blue,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
+          Column(
+              children: transactions.map((tx) {
+            return Card(
+                child: Row(children: [
+              Container(
                 child: Text(
-                  'LIST OF TX',
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.center,
+                  tx.amount.toString(),
                 ),
               ),
-              elevation: 5,
-            ),
-          ),
+              Column(
+                children: [
+                  Text(tx.title),
+                  Text(tx.date.toString()),
+                ],
+              )
+            ]));
+          }).toList()),
         ],
       ),
     );
