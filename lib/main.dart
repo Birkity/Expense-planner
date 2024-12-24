@@ -1,7 +1,5 @@
-import 'package:expense_planner/widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
-import '../widgets/transaction_list.dart';
-import '../widgets/new_transaction.dart';
+import 'package:expense_planner/widgets/user_transaction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,9 +22,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +46,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          NewTransaction(),
-          TransactionList(),
+          UserTransaction(),
         ],
       ),
     );
