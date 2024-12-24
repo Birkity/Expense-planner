@@ -11,14 +11,7 @@ class UserTransaction extends StatefulWidget {
 }
 
 class _UserTransactionState extends State<UserTransaction> {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: "t1",
-      title: "New Shoes",
-      amount: 70.1,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> transactions = [];
 
   void _addNewTransaction(String title, double amount) {
     final newTx = Transaction(
@@ -36,7 +29,7 @@ class _UserTransactionState extends State<UserTransaction> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NewTransaction(),
+        NewTransaction(_addNewTransaction),
         TransactionList(transactions),
       ],
     );
