@@ -1,5 +1,7 @@
+import 'package:expense_planner/widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
 import '../widgets/transaction_list.dart';
+import '../widgets/new_transaction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,32 +51,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Title'),
-                    controller: titleController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Amount'),
-                    controller: amountController,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text('Add Transaction'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.purple,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          NewTransaction(),
           TransactionList(),
         ],
       ),
