@@ -1,13 +1,21 @@
+import 'package:expense_planner/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_planner/widgets/user_transaction.dart';
+import 'widgets/transaction_list.dart';
+import 'models/transaction.dart';
+import 'widgets/new_transaction.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,6 +30,29 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final List<Transaction> transactions = [];
+
+  void _addNewTransaction(String title, double amount) {
+    final newTx = Transaction(
+        id: DateTime.now().millisecond.toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +61,7 @@ class MyHomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _startAddNewTransaction(context),
           ),
         ],
       ),
@@ -53,13 +84,14 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            UserTransaction(),
+            TransactionList(transactions),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => _startAddNewTransaction(context),
+          child: const Icon(Icons.add)),
     );
   }
 }
